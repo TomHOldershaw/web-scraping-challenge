@@ -42,7 +42,7 @@ def scrape():
 
     tables = pd.read_html(url)
     # Desired table is the second one on the page
-    facts_table = tables[1].to_html()
+    facts_table = tables[1].to_html(header=False, index=False)
 
     # Mars Hemispheres
     # Set page URL
@@ -90,7 +90,7 @@ def scrape():
         'headline': headline, 
         'text': text,
         'JPL_image': image_url,
-        'Mars_facts': facts_table,
+        'mars_facts': facts_table,
         'Hemispheres': hemisphere_list
     }
 
