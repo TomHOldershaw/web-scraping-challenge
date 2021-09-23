@@ -64,6 +64,8 @@ def scrape():
         # Get title
         title = item.find('h3').text
         hemi_title = title[:-9]
+        # Thumb image
+        thumb = item.find('img', class_="thumb")['src']
         # Go to page
         browser.links.find_by_partial_text(title).click()
         soup = bs(browser.html, 'html.parser')
@@ -73,7 +75,8 @@ def scrape():
         # Save data
         dictionary = {
             'title': hemi_title,
-            'img_url': url + link
+            'img_url': url + link,
+            'thumb': url + thumb
         }
         hemisphere_list.append(dictionary)
         # Go back for next image
@@ -84,7 +87,8 @@ def scrape():
 
     # Single dictionary
     mars_data = {
-        'nasa_news': {'headline': headline, 'text': text},
+        'headline': headline, 
+        'text': text,
         'JPL_image': image_url,
         'Mars_facts': facts_table,
         'Hemispheres': hemisphere_list

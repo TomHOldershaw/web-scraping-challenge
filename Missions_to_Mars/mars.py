@@ -1,36 +1,34 @@
 import pymongo
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from scrape_mars import scrape
 
 app = Flask(__name__)
 
+# Set up MongoDB to store data
+mongo = pymongo.MongoClient('mongodb://localhost:27017')
+db = mongo.mars_db
+    
+# Define collection
+mars = db.mars
+
 # App route to scrape
 @app.route("/scrape")
-def store:
-    mars_data = scrape
-
-    # Set up MongoDB to store data
-    mongo = pymongo.MongoClient('mongodb://localhost:27017')
-    db = mongo.mars_db
-    mars = db.mars
+def store():
+    mars_data = scrape()
 
     # Store data
-    mars.insert_one(mars_data)
+    mars.update({}, mars_data, upsert=True)
 
     return redirect("/", code=302)
 
 @app.route("/")
-def main:
-    # Connect to db
-    # Set up MongoDB to store data
-    mongo = pymongo.MongoClient('mongodb://localhost:27017')
-    db = mongo.mars_db
-    mars = db.mars
-
+def main():
     # Read data
-    mars_data = list(mars.find)[0]
+    mars_data = mars.find_one()
 
-    return render_template('mars.html', parameters=['data'=mars_data])
+    print(mars_data)
 
+    return render_template('mars.html', data=mars_data)
+    
 if __name__ == "__main__":
     app.run(debug=True)

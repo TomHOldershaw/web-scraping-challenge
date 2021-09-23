@@ -8,7 +8,7 @@
 <div class="row bg-light justify-content-center">
     <div class="row col-12 justify-content-center"><h1>Mars Facts</h1></div>
     <div class="row col-12 justify-content-center">
-    <p><a href="scrape/">
+    <p><a href="scrape">
     <button type="button" class="btn btn-primary">Scrape data</button>
     </a></p>
     </div>
@@ -17,13 +17,13 @@
 <div class="row">
     <div class="col-12">
         <h2>Latest news</h2>
-        <h3>{{data.nasa_news.headline}}</h3><p>{{data.nasa_news.text}}</p>
+        <h3>{{data.headline}}</h3><p>{{data.text}}</p>
     </div>
 </div>
 
 <div class="row">
     <div class="col-12 col-sm-8">
-        <h2>Mars Image</h2><p><img src='{{data.JPL_image}}'></p>
+        <h2>Mars Image</h2><p><img src='{{data.JPL_image}}' class="img-fluid"></p>
     </div>
     <div class="col-12 col-sm-4">
         <h2>Mars Facts</h2>
@@ -32,11 +32,12 @@
 </div>
 
 <div class="row">
-    {% for hemisphere in data.Hemispheres%}
-    <div class="col-6 col-md-3">
-        <h3>Hemisphere</h3>
-        <img src='{{hemisphere.img_url}}'>
+    {% for hemisphere in data.Hemispheres %}
+    <div class="col-6 col-md-3 justify-content-center">
+        <a href="{{hemisphere.img_url}}">
+        <img src='{{hemisphere.thumb}}' class="img-fluid">
         <p>{{hemisphere.title}}</p>
+        </a>
     </div>
     {%endfor%}
 
