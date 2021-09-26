@@ -28,7 +28,7 @@ def main():
 
     print(mars_data)
 
-    return render_template('mars.html', data=mars_data)
+    return render_template('index.html', data=mars_data)
     
 if __name__ == "__main__":
     app.run(debug=True)
