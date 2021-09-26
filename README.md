@@ -14,3 +14,5 @@ Project files are in the 'Missions to Mars' folder and consist of:
 2. mars.py - main script with Flask routes
 3. scrape_mars.py - script containing the code from the Jupyter notebook to scrape websites
 4. templates/index.html - basic webpage to display information, using Bootstrap for responsive sizing
+
+There is an additional file in the root directory, screen_shot.jpg, showing the rendered web page with data.
